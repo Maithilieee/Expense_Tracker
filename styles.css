@@ -1,0 +1,437 @@
+:root {
+    /* Define pastel color variables for consistent theming */
+    --pastel-pink: #FFD1DC;
+    --pastel-blue: #BFEAF5;
+    --pastel-yellow: #FFFFD1;
+    --pastel-green: #BAFFC9;
+    --pastel-purple: #E6E6FA;
+}
+
+body {
+    /* General body styling */
+    font-family: 'Arial', sans-serif;
+    background-color: var(--pastel-yellow); /* Light yellow background */
+    color: #333; /* Text color */
+    line-height: 1.6; /* Line height for readability */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+header {
+    /* Header styling */
+    background-color: var(--pastel-pink); /* Light pink background */
+    text-align: center; /* Centered text */
+    padding: 1rem; /* Padding around the header */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow effect */
+}
+
+main {
+    /* Main content layout */
+    max-width: 1200px; /* Maximum width of the main section */
+    margin: 0 auto; /* Center the main section */
+    padding: 2rem; /* Padding around the main content */
+    display: grid; /* Use grid layout */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid columns */
+    gap: 2rem; /* Space between grid items */
+}
+
+section {
+    /* Styling for each section */
+    background-color: white; /* White background */
+    border-radius: 10px; /* Rounded corners */
+    padding: 1.5rem; /* Padding inside each section */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Shadow for depth */
+    transition: transform 0.3s ease; /* Smooth transition for hover effects */
+}
+
+section:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+}
+
+h1, h2 {
+    /* Heading styles */
+    color: #444; /* Darker text for headings */
+}
+
+form {
+    /* Form styling */
+    display: flex; /* Use flexbox layout */
+    flex-direction: column; /* Stack items vertically */
+    gap: 1rem; /* Space between form fields */
+}
+
+input, select, button {
+    /* Styling for input fields, selects, and buttons */
+    padding: 0.5rem; /* Padding inside form elements */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 1rem; /* Font size for form elements */
+}
+
+button {
+    /* Button specific styling */
+    background-color: var(--pastel-green); /* Green background for buttons */
+    border: none; /* Remove border */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+button:hover {
+    background-color: #A0FFA0; /* Lighter green on hover */
+}
+
+#expenses {
+    /* Expenses list styling */
+    list-style-type: none; /* Remove list bullets */
+    padding: 0; /* Remove default padding */
+}
+
+#expenses li {
+    /* Individual expense item styling */
+    background-color: var(--pastel-blue); /* Light blue background */
+    margin-bottom: 0.5rem; /* Space between expense items */
+    padding: 0.5rem; /* Padding inside expense items */
+    border-radius: 5px; /* Rounded corners */
+    display: flex; /* Flexbox for consistent layout */
+    justify-content: space-between; /* Space between content and delete button */
+}
+/* Saving Jar Styling */
+
+#savings-jar {
+    /* Savings jar container styling */
+    width: 100px; /* Width of the jar */
+    height: 150px; /* Height of the jar */
+    background-color: var(--pastel-purple); /* Light purple background */
+    margin: 1rem auto; /* Center the jar */
+    border-radius: 0 0 50px 50px; /* Rounded bottom corners */
+    position: relative; /* Positioning for the internal height animation */
+    overflow: hidden; /* Hide overflow content */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Added shadow for a 3D effect */
+    animation: jar-bounce 1s infinite alternate; /* Bounce animation for jar */
+}
+
+@keyframes jar-bounce {
+    /* Animation for bouncing effect */
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-10px);
+    }
+}
+.delete-button {
+    background-color: transparent;
+    border: none;
+    color: red;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+#savings-jar::before {
+    /* Dynamic height indicator for the jar */
+    content: '';
+    position: absolute; /* Absolute positioning */
+    bottom: 0; /* Align to bottom */
+    left: 0; /* Align to left */
+    right: 0; /* Align to right */
+    height: 0%; /* This should be dynamically updated with JS */
+    background-color: gold; /* Gold color for the savings */
+    transition: height 0.5s ease; /* Smooth height transition */
+    box-shadow: inset 0 0 10px rgba(255, 215, 0, 0.5); /* Inner shadow for depth */
+    animation: fill-animation 0.5s ease; /* Animation for filling jar */
+}
+
+@keyframes fill-animation {
+    /* Animation for filling effect */
+    from {
+        height: 0%; /* Start from empty */
+    }
+    to {
+        height: 100%; /* Fill to top */
+    }
+}
+
+/* Glitter effect for the jar */
+.glitter {
+    position: absolute; /* Positioning for glitter */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background: url('glitter.png') repeat; /* Background image for glitter effect */
+    opacity: 0.5; /* Semi-transparent for subtle effect */
+    pointer-events: none; /* Ignore mouse events */
+    animation: sparkle 2s infinite linear; /* Continuous sparkle animation */
+}
+
+@keyframes sparkle {
+    /* Animation for sparkling effect */
+    0% {
+        opacity: 0.5; /* Start opacity */
+    }
+    50% {
+        opacity: 1; /* Full visibility */
+    }
+    100% {
+        opacity: 0.5; /* Fade out */
+    }
+}
+
+/* Optional: Adding a label for the jar */
+#savings-jar::after {
+    /* Label for the jar */
+    content: 'Savings'; /* Text label */
+    position: absolute; /* Positioning for label */
+    top: -25px; /* Position above the jar */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Centering */
+    font-size: 16px; /* Font size */
+    color: white; /* Text color */
+    font-weight: bold; /* Bold text */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Shadow for text */
+}
+
+#expense-chart {
+    /* Chart styling */
+    width: 100%; /* Full width */
+    max-height: 300px; /* Maximum height */
+}
+
+#calendar-container {
+    /* Calendar section styling */
+    background-color: #e0f7fa; /* Light teal background */
+    border-radius: 15px; /* Rounded corners */
+    padding: 20px; /* Padding around calendar */
+    margin-bottom: 20px; /* Space below the calendar */
+}
+
+.calendar-header {
+    /* Header for calendar section */
+    display: flex; /* Flexbox layout */
+    justify-content: space-between; /* Space between header elements */
+    align-items: center; /* Center align vertically */
+    margin-bottom: 10px; /* Space below the header */
+}
+
+#calendar-grid {
+    /* Grid for calendar days */
+    display: grid; /* Grid layout */
+    grid-template-columns: repeat(7, 1fr); /* Seven columns for days */
+    gap: 5px; /* Space between days */
+    max-width: 600px; /* Maximum width */
+    margin: 20px auto; /* Center the grid */
+    background-color: #fff; /* Background for the calendar */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+}
+
+.calendar-day {
+    /* Individual day cell styling */
+    height: 40px; /* Height of day cells */
+    width: 35px; /* Width of day cells */
+    border-radius: 100%; /* Fully rounded corners */
+    display: flex; /* Flexbox layout */
+    align-items: center; /* Center align vertically */
+    justify-content: center; /* Center align horizontally */
+    border: 1px solid #ddd; /* Optional border for clarity */
+}
+
+.expense-note {
+    /* Styling for individual expense notes */
+    margin: 5px 0; /* Space between notes */
+    padding: 5px; /* Padding inside notes */
+    border-radius: 5px; /* Rounded corners */
+}
+
+#calendar-grid div {
+    /* Styling for each calendar day */
+    display: flex; /* Flexbox layout */
+    align-items: center; /* Center align vertically */
+    justify-content: center; /* Center align horizontally */
+    background-color: #f0f3f6; /* Background color for days */
+    border-radius: 100px; /* Fully rounded corners */
+    color: #2c3e50; /* Text color */
+    font-size: 1rem; /* Font size */
+    font-weight: 600; /* Bold font weight */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transition for hover effects */
+    position: relative; /* Positioning for hover effects */
+    overflow: hidden; /* Hide overflow content */
+}
+
+#calendar-grid div:hover {
+    /* Hover effects for calendar days */
+    background-color: #A3D9FF; /* Light pastel blue for hover background */
+    color: #2C3E50; /* Darker, contrasting text color */
+    transform: translateY(-8px); /* Lift effect on hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Shadow for hover */
+    border-radius: 12px; /* Increase roundness on hover */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Smooth transitions */
+}
+
+#calendar-grid div:hover::before {
+    /* Overlay effect for calendar day hover */
+    content: '';
+    position: absolute; /* Absolute positioning */
+    top: -50%; /* Position above the cell */
+    left: -50%; /* Position left of the cell */
+    width: 200%; /* Expand width */
+    height: 200%; /* Expand height */
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15), transparent 50%); /* Radial gradient effect */
+    opacity: 0; /* Initial opacity */
+    transition: opacity 0.4s ease; /* Smooth opacity transition */
+}
+
+#calendar-grid div:hover::before {
+    /* Show overlay effect on hover */
+    opacity: 1; /* Fully visible */
+}
+
+.calendar-day:hover {
+    /* Hover effects for calendar day cells */
+    background-color: #b3e5fc; /* Light blue background on hover */
+    transform: scale(1.1); /* Scale effect on hover */
+}
+
+.day-name {
+    /* Day name styling */
+    font-weight: bold; /* Bold font */
+    font-size: 1.1rem; /* Slightly larger font size */
+}
+
+.day-number {
+    /* Day number styling */
+    font-size: 1.5rem; /* Larger font size for numbers */
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+    /* Adjust grid layout on smaller screens */
+    main {
+        grid-template-columns: 1fr; /* Single column layout */
+    }
+
+    #calendar-grid {
+        grid-template-columns: repeat(3, 1fr); /* Three columns for calendar */
+    }
+
+    .calendar-day {
+        height: 30px; /* Smaller height for days */
+        width: 30px; /* Smaller width for days */
+    }
+}
+
+.expense-notes {
+    margin-top: 20px;
+}
+
+#notes-section h2 {
+    font-size: 2rem;
+    color: #2C3E50;
+    text-align: center;
+    margin-bottom: 1px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+#notes-container {
+
+   
+    border-radius: 5px;
+    background-color: #ffffff; /* Background for the notes section */
+    display: grid;
+  
+    gap: 10px;
+    padding: 20px;
+}
+
+.note {
+    display: flex; /* Use flexbox layout */
+    justify-content: space-between; /* Space between content and delete button */
+    align-items: center; /* Center align items vertically */
+    padding: 8px;
+    position: relative;
+    transition: background-color 0.3s ease;
+    font-family: 'Arial', sans-serif;
+    color: #914e63;
+    background-color: #f7d6e0; /* Pastel background for notes */
+    border: 1px dashed #d37f92; /* Dashed line similar to the image */
+    border-radius: 10px;
+    margin: 10px 0;
+    
+}
+
+.note:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Slightly darken on hover */
+}
+
+.delete-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px; /* Adjust size if necessary */
+    margin-left: 13px;
+}
+
+.delete-button:hover {
+    background-color: #fb7185; /* Change color on hover */
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.sticker {
+    font-size: 20px;
+    margin-left: 5px;
+}
+#calendar-notes-section {
+    margin-top: 20px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.calendar-note {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+/* General container for the notes */
+#calendar-notes-container {
+    width: 30%;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+ 
+  }
+  
+  /* Styling for each individual note */
+  .calendar-note {
+    background-color: #f7d6e0; /* Pastel background for notes */
+    border: 1px dashed #d37f92; /* Dashed line similar to the image */
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px 0;
+    font-family: 'Arial', sans-serif;
+    color: #914e63;
+    position: relative;
+  }
+  
+  /* Dotted lines for text areas */
+  .note-text {
+    border-bottom: 1px dotted #d37f92;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  
+ 
